@@ -84,23 +84,25 @@ public class FileStreamSource implements SenfStreamSource
 		try {
 			File[] fl = root.listFiles();
 
-			while( ++curFileIndex < fl.length )
-			{
-				curFile = fl[ curFileIndex ];
+            if( fl != null )
+            {
+                while( ++curFileIndex < fl.length )
+                {
+                    curFile = fl[ curFileIndex ];
 
-				if( ( curFile.isDirectory() && curFile.getAbsolutePath().equals( curFile.getCanonicalPath() ) ) || curFile.isFile() )
-				{
-					advanced = true;
-					return true;
-				}
-			}
-			return false;
+                    if( ( curFile.isDirectory() && curFile.getAbsolutePath().equals( curFile.getCanonicalPath() ) ) || curFile.isFile() )
+                    {
+                        advanced = true;
+                        return true;
+                    }
+                }
+            }
+            return false;
 		} catch( FileNotFoundException fnfe ) {
 			throw new SenfStreamSourceException( "File not found in FileStreamSource" );
 		} catch( IOException ioe ) {
 			throw new SenfStreamSourceException( "Error reading file in FileStreamSource" );
 		}
-		
 	}
 
 	public SenfObject next() throws SenfStreamSourceException

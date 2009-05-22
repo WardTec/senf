@@ -31,7 +31,7 @@ public class SenfOptionsLoader
 	}
 
 	public void loadSeeds() throws Exception
-    	{
+    {
         	File pluginsdir = new File( "seeds" );
 
     		if( !pluginsdir.isDirectory() )
@@ -248,7 +248,7 @@ public class SenfOptionsLoader
 			else if( args[ i ].equals( "-nl" ) ) {
 			    opts.logToFile = false;
 			}
-	
+
         	    }
 
 			return true;
@@ -301,27 +301,27 @@ public class SenfOptionsLoader
         	out.println( "Scans folders for files with possible social security or credit card numbers." );
         	out.println( "Usage: senf [OPTION]" );
         	out.println();
-        	out.println( "  -q\t\tQuiet mode" );
-        	out.println( "  -v\t\tVerbose mode" );
+            out.println( "  -ac\t\tAppend configuration file info to output log" );
+            out.println( "  -al\t\tAppend session log to an already existing log" );
+            out.println( "  -as\t\tAuto-start scanning (ignored when -g is specified)" );
         	out.println( "  -e\t\tPrint error messages to screen" );
-        	out.println( "  -p\t\tSet the path to start scanning from" );
-        	out.println( "  -l\t\tSet the last modified date to check, in yyyyMMdd format (files last modified before this date are skipped)" );
-        	out.println( "  -f\t\tSet the max file size to scan; end size (no spaces) with 'g' for gigs, 'm' for megs, 'k' for kilobytes, and nothing for bytes" );
-        	out.println( "  -m\t\tSet minimum number of times to match a CCN/SSN pattern before reporting a file" );
-        	out.println( "  -o\t\tSet the name (and path) of the tab-delimited log file; default is senf_DATEnn; .txt will be appended" );
-		out.println( "  -al\t\tAppend session log to an already existing log" );
-        	out.println( "  -ac\t\tAppend configuration file info to output log" );
-		out.println( "  -nl\t\tDo not include a log file" );
-		out.println( "  -g\t\tHide GUI" );
-        	out.println( "  -as\t\tAuto-start scanning (ignored when -g is specified)" );
+            out.println( "  -f\t\tSet the max file size to scan; end size (no spaces) with 'g' for gigs, 'm' for megs, 'k' for kilobytes, and nothing for bytes" );
+            out.println( "  -g\t\tHide GUI" );
         	out.println( "  -h\t\tDisplay this help and exit" );
+        	out.println( "  -l\t\tSet the last modified date to check, in yyyyMMdd format (files last modified before this date are skipped)" );
+        	out.println( "  -m\t\tSet minimum number of times to match a CCN/SSN pattern before reporting a file" );
+            out.println( "  -nl\t\tDo not include a log file" );
+        	out.println( "  -o\t\tSet the name (and path) of the tab-delimited log file; default is senf_DATEnn; .txt will be appended" );
+            out.println( "  -p\t\tSet the path to start scanning from" );
+            out.println( "  -q\t\tQuiet mode" );
+        	out.println( "  -v\t\tVerbose mode" );
         	out.println();
         	out.println( "If a directory is not specified, senf starts in the current working directory" );
         	out.println( "If file size not specified, senf checks all files" );
         	out.println( "If minimum number of matches is not specified, senf assumes " + SenfOptions.DEFAULT_MIN_MATCHES );
         	out.println();
         	out.println( "Written and maintained by Sean Reid, Jason Phelps, and Alek Amrani");
-		out.println( "InfoSec @ UT Austin" );
+            out.println( "InfoSec @ UT Austin" );
         	out.println();
         	out.println( "Report bugs to <abuse@utexas.edu>." );
     	}

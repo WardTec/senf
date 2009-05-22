@@ -43,7 +43,7 @@ import java.net.URL;
  * @author Sean Reid
  */
 public class SenfOptions {
-
+    
     // Options specified at runtime (pre-scan)
     public static final String DEFAULT_LOG_PREFIX = "senf_";
     public static final String DEFAULT_LOG_EXTENSION = ".txt";
@@ -75,10 +75,9 @@ public class SenfOptions {
     public String logFilename = "";
     public Seed[] scanners = null;
     public SenfACL senfACL = null;
-    public boolean scanHD = true;
-    public boolean scanWeb = false;
     public boolean run = true;
-    public String baseSite;
+    public boolean scanHD = true;
+    //public boolean scanWeb = false;
  
     public void setupOutputLog()
     {

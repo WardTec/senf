@@ -20,7 +20,7 @@ package senf;
 
 public class Base64
 {
-
+    
 	private static final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 	private static void binInt( int i )
@@ -113,24 +113,5 @@ public class Base64
 		}
 
 		return bytes;
-	}
-
-	private static void validate( String string )
-	{
-		String encoded = Base64.encode( string.getBytes() );
-		String decoded = new String( Base64.decode( encoded ) );
-
-		System.out.println( "Original string: " + string  );
-		System.out.println( "Encoded  string: " + encoded );
-		System.out.println( "Decoded  string: " + decoded );
-		System.out.println( "Match? (l orig, l decode): " + string.equals( decoded ) + " ( " + string.length() + ", " + decoded.length() + " ) " );
-		System.out.println();
-
-	}
-
-	public static void main( String[] args )
-	{
-		for( int i = 0; i < args.length; ++i )
-			Base64.validate( args[ i ] );
 	}
 }

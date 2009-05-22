@@ -24,6 +24,7 @@ public class ACLThing
 	private File ACLConfig;
 	private String[] lines;
 	private ArrayList< String > linesList;
+    private boolean exists = true;
 
 	public ACLThing()
 	{
@@ -43,6 +44,7 @@ public class ACLThing
                 }
 		catch ( java.io.FileNotFoundException fnfe )
 		{
+                        exists = false;
                         System.out.println( "ACL not found!" );
                 }
 		catch ( java.io.IOException ioe )
@@ -53,29 +55,44 @@ public class ACLThing
 
 	public void add( String toAdd )
 	{
-		linesList.add( toAdd );
+        if( exists )
+            linesList.add( toAdd );
+        else
+        {
+            createACL();
+        }
 	}
 
 	public void remove( int toRemove )
 	{
-		linesList.remove( toRemove );
+        if( exists )
+            linesList.remove( toRemove );
 	}
 
 	public void swap( int one, int two )
 	{
-		String first = linesList.get( one );
-		String second = linesList.get( two );
-		linesList.set( one, second );
-		linesList.set( two, first );
+        if( exists )
+        {
+            String first = linesList.get( one );
+            String second = linesList.get( two );
+            linesList.set( one, second );
+            linesList.set( two, first );
+        }
 	}
 
 	public int getSize()
 	{
+        if( !exists )
+            return 0;
+
 		return linesList.size();
 	}
 
 	public String[] getLines()
 	{
+        if( !exists )
+            return new String[0];
+
 		String[] lines = new String[ linesList.size() ];
 		int i;
 
@@ -89,26 +106,47 @@ public class ACLThing
 
 	public void finalize( JTable ACLTable )
 	{
-                try
-                {
-                        BufferedWriter ACLWriter = new BufferedWriter( new FileWriter( ACLConfig ) );
-			int i;
+        if( !exists )
+            createACL();
+        
+            try
+            {
+                BufferedWriter ACLWriter = new BufferedWriter( new FileWriter( ACLConfig ) );
+                int i;
 
-			for( i=0; i<linesList.size(); i++ )
-			{
-				ACLWriter.write( linesList.get( i )+"\n" );
-			}
+                for( i=0; i<linesList.size(); i++ )
+                {
+                    ACLWriter.write( linesList.get( i )+"\n" );
+                }
 
-			ACLWriter.close();
-                }
-                catch ( java.io.FileNotFoundException fnfe )
-                {
-                        System.out.println( "ACL not found!" );
-                }
-                catch ( java.io.IOException ioe )
-                {
-                        System.out.println( "Error reading ACL file!" );
-		}
+                ACLWriter.close();
+            }
+            catch ( java.io.FileNotFoundException fnfe )
+            {
+                    System.out.println( "ACL not found!" );
+            }
+            catch ( java.io.IOException ioe )
+            {
+                    System.out.println( "Error reading ACL file!" );
+            }
 	}
+
+    public void createACL()
+    {
+        try
+        {
+            File acl = ACLConfig;
+            if (!acl.exists() )
+            {
+                acl.createNewFile();
+            }
+
+            exists = true;
+        }
+        catch( Exception E )
+        {
+            System.out.println( "Error Creating ACL!" );
+        }
+    }
 }
 
