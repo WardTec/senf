@@ -184,6 +184,10 @@ public class SenfScanner implements Runnable
 		{
 			if( opts.logToFile )
 			{
+
+                out.println( "There was a total of " + opts.junk + " unreadable files.");
+                if( opts.junk > 0 )
+                    out.println( "The most common cause of this is Junctions in Microsoft Windows.  Please see the README for more info." );
 				if( opts.appendConfs )
 				{
 					out.println( "\nACL Follows: " );
@@ -230,15 +234,25 @@ public class SenfScanner implements Runnable
  	                        {
                                         SenfStream ss = (SenfStream)so;
                                         scan( ss );
-                                }
-                                else if( so instanceof SenfStreamSource )
+                            }
+                            else if( so instanceof SenfStreamSource )
+                            {
+                                if( (!(sss instanceof ZipStreamSource)) || ((sss instanceof ZipStreamSource) && !(so instanceof ZipStreamSource)) )
                                 {
-					if( (!(sss instanceof ZipStreamSource)) || ((sss instanceof ZipStreamSource) && !(so instanceof ZipStreamSource)) )
-					{
-                                       		scan( (SenfStreamSource)so );
-					}
+                              		scan( (SenfStreamSource)so );
                                 }
+                            }
+                    }
+
+                    if( opts.junkshun && sss.containsJunk() )
+                    {
+                        if(( (JunkStreamSource)sss ).isJunk())
+                        {
+                            out.println( "There was an error reading the StreamSource: " + sss.getName() );
+                            out.println( sss.getName() + " located at " + sss.getURI() + " is unreadable." );
+                            opts.junk++;
                         }
+                    }
                 }
 	}
 

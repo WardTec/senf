@@ -163,7 +163,10 @@ public class SenfOptionsLoader
 		{
 			opts.logToFile = true;
 		}
-
+        if( (opt = (String)optm.get( "junction" ) ) != null && isTrue( opt ) )
+		{
+			opts.junkshun = !opts.junkshun;
+		}
 		try {
         	    for( int i = 0; i < args.length; ++i ) {
         	        if( args[ i ].equals( "-h" ) ) {
@@ -248,6 +251,9 @@ public class SenfOptionsLoader
 			else if( args[ i ].equals( "-nl" ) ) {
 			    opts.logToFile = false;
 			}
+            else if( args[ i ].equals( "-j" ) ) {
+                opts.junkshun = !opts.junkshun;
+            }
 
         	    }
 

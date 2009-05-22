@@ -22,7 +22,7 @@ import java.net.URL;
 
 public class Senf
 {
-	public static String VERSION = "1.haku.111";
+	public static String VERSION = "1.haku.338";
 	public static String BASE_VERSION = "1.sasuke.111";
 
 	private static SenfScanner s;

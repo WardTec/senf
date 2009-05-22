@@ -96,4 +96,9 @@ public class PPTXStreamSource implements SenfStreamSource
 	{
 		return f.toURI();
 	}
+
+    public boolean containsJunk()
+    {
+        return false;
+    }
 }

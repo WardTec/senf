@@ -24,13 +24,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import java.util.Stack;
-
 import java.net.URI;
 
 
 //This class is used as the default "container" for streams
-public class FileStreamSource implements SenfStreamSource
+public class FileStreamSource implements JunkStreamSource
 {
 	private class ActRec
 	{
@@ -47,6 +45,7 @@ public class FileStreamSource implements SenfStreamSource
 	private File root, curFile;
 	private int curFileIndex;
 	private boolean advanced;
+    private boolean junk;
 
 
 	public FileStreamSource( String path ) throws SenfStreamSourceException
@@ -84,17 +83,20 @@ public class FileStreamSource implements SenfStreamSource
 		try {
 			File[] fl = root.listFiles();
 
-            if( fl != null )
+            if( fl == null)
             {
-                while( ++curFileIndex < fl.length )
-                {
-                    curFile = fl[ curFileIndex ];
+                junk = true;
+                return false;
+            }
 
-                    if( ( curFile.isDirectory() && curFile.getAbsolutePath().equals( curFile.getCanonicalPath() ) ) || curFile.isFile() )
-                    {
-                        advanced = true;
-                        return true;
-                    }
+            while( ++curFileIndex < fl.length )
+            {
+                curFile = fl[ curFileIndex ];
+
+                if( ( curFile.isDirectory() && curFile.getAbsolutePath().equals( curFile.getCanonicalPath() ) ) || curFile.isFile() )
+                {
+                    advanced = true;
+                    return true;
                 }
             }
             return false;
@@ -135,4 +137,14 @@ public class FileStreamSource implements SenfStreamSource
 	{
 		return root.toURI();
 	}
+
+    public boolean isJunk()
+    {
+        return junk;
+    }
+
+    public boolean containsJunk()
+    {
+        return true;
+    }
 }

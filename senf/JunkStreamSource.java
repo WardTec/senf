@@ -14,9 +14,7 @@
 
 package senf;
 
-public interface SenfStreamSource extends SenfObject
+public interface JunkStreamSource extends SenfStreamSource
 {
-	public boolean hasNext() throws SenfStreamSourceException;
-	public SenfObject next() throws SenfStreamSourceException;
-    public boolean containsJunk();
+    public boolean isJunk();
 }

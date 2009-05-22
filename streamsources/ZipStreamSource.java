@@ -89,4 +89,9 @@ public class ZipStreamSource implements SenfStreamSource
 	{
 		return f.toURI();
 	}
+
+    public boolean containsJunk()
+    {
+        return false;
+    }
 }

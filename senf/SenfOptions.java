@@ -78,6 +78,9 @@ public class SenfOptions {
     public boolean run = true;
     public boolean scanHD = true;
     //public boolean scanWeb = false;
+    public boolean junkshun = false;
+    public int junk = 0;
+
  
     public void setupOutputLog()
     {
@@ -104,6 +107,14 @@ public class SenfOptions {
 			logFilename = logFilename.substring( 0, logFilename.length() - DEFAULT_LOG_EXTENSION.length() ) + "_new" + DEFAULT_LOG_EXTENSION;
 		}
 	}
+
+    //Set junction scanning to true if the OS is a Windows Base
+    if( System.getProperty("os.name").toLowerCase().contains("windows") )
+    {
+        junkshun = true;
+    }
+
+
     }
 
     public void setMaxFileLength( String fileLen ) throws NumberFormatException {
