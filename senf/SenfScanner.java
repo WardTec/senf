@@ -100,9 +100,7 @@ public class SenfScanner implements Runnable
 	public void run()
 	{
         opts.junk = 0;
-        SenfOptionsLoader load = new SenfOptionsLoader( new SenfOptions() );
-		load.loadOptions( opts.args );
-		opts = load.opts;
+        opts.senfACL = new SenfACL( "senf.acl" );
         
 		try
 		{

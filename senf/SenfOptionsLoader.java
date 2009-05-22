@@ -88,7 +88,7 @@ public class SenfOptionsLoader
 	public boolean loadOptions( String[] args ) 
 	{
 		opts.senfACL = new SenfACL( "senf.acl" );
-        	HashMap optm = loadMap( "senf.conf" );
+        HashMap optm = loadMap( "senf.conf" );
 		String opt;
 
 		if( ( opt = (String)optm.get( "verbose" ) ) != null && isTrue( opt ) )
