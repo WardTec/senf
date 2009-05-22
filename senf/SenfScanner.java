@@ -99,6 +99,11 @@ public class SenfScanner implements Runnable
 
 	public void run()
 	{
+        opts.junk = 0;
+        SenfOptionsLoader load = new SenfOptionsLoader( new SenfOptions() );
+		load.loadOptions( opts.args );
+		opts = load.opts;
+        
 		try
 		{
 			out.println( "Senf Version " + Senf.VERSION + " (Base Version: " + Senf.BASE_VERSION + ") Output Log" );

@@ -33,6 +33,7 @@ public class Senf
 		SenfOptionsLoader load = new SenfOptionsLoader( new SenfOptions() );
 		load.loadOptions( args );
 		opts = load.opts;
+        opts.args = args;
 
 		if( opts == null )
 			return;

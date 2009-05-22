@@ -80,6 +80,7 @@ public class SenfOptions {
     //public boolean scanWeb = false;
     public boolean junkshun = false;
     public int junk = 0;
+    public String[] args;
 
  
     public void setupOutputLog()
