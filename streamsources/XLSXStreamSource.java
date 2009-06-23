@@ -53,6 +53,7 @@ public class XLSXStreamSource implements SenfStreamSource
 			e = z.entries();
 
 		} catch( IOException ioe ) {
+			System.out.println("sss exception ugh");
 			throw new SenfStreamSourceException( "Error opening zip file!" );
 		}
 

@@ -32,6 +32,7 @@ public class XLSXParser implements SenfParser
 	{
 		try 
 		{
+			System.out.println( "parser ugh");
 			return new XLSXStreamSource( ( FileStream )so );
 		} catch( SenfObjectException soe ) {}
 
