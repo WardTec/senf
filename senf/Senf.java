@@ -10,65 +10,38 @@
  *
  * Send comments to security@utexas.edu
  *
-*/
-
-//Package
+ */
 package senf;
 
-//Import Java Packages
-import java.io.File;
-import java.net.URL;
+public class Senf {
 
-
-public class Senf
-{
 	public static String VERSION = "1.haku.338";
 	public static String BASE_VERSION = "1.sasuke.111";
-
 	private static SenfScanner s;
 	private static SenfOptions opts;
 
-	public static void main( String[] args )
-	{
-		SenfOptionsLoader load = new SenfOptionsLoader( new SenfOptions() );
-		load.loadOptions( args );
+	public static void main(String[] args) {
+		SenfOptionsLoader load = new SenfOptionsLoader(new SenfOptions());
+		load.loadOptions(args);
 		opts = load.opts;
-        opts.args = args;
+		opts.args = args;
 
-		if( opts == null )
+		if(opts == null) {
 			return;
+		}
 
-		try
-		{
-			if( opts.run )
-			{
-				if( opts.showGUI )
-				{
-					new SenfGUI( opts ).showGUI();
-				}
-				else
-				{
-					Thread senfThread = new Thread(
-						new SenfScanner(
-							opts
-							,
-							null
-							,
-							null
-							,
-							null
-							,
-							null
-						)
-					 );
+		try {
+			if(opts.run) {
+				if(opts.showGUI) {
+					new SenfGUI(opts).showGUI();
+				} else {
+					Thread senfThread = new Thread(new SenfScanner(opts, null, null, null, null));
 					senfThread.start();
 				}
 			}
-		}
-		catch( Exception e ) 
-		{
-			System.out.println( e );
+		} catch(Exception e) {
+			System.out.println(e);
 			e.printStackTrace();
-		} 
-	}	
+		}
+	}
 }

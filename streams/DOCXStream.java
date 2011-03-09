@@ -55,7 +55,7 @@ public class DOCXStream implements CompressedSenfStream
 		}
 		catch( Exception E )
 		{
-			throw new SenfStreamException( "Error creating PDF File Stream!" );
+			throw new SenfStreamException( "Error creating DOCX File Stream!" );
 		}
 	}
 
@@ -70,7 +70,7 @@ public class DOCXStream implements CompressedSenfStream
 		}
 		catch( Exception E )
 		{
-			throw new SenfStreamException( "Error getting reader in PDFStream!" );
+			throw new SenfStreamException( "Error getting reader in DOCXStream!" );
 		}
 	}
 
