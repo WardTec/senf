@@ -37,7 +37,7 @@ To compile the source code, the following command may be used:
 
 To create an executable JAR archive, like the one available for download, the
 following command may be used:
-	jar cmf manifest senf/*.class senf/images/* streams/*.class streamsources/*.class
+	jar cmf manifest senf.jar senf/*.class senf/images/* streams/*.class streamsources/*.class
 
 SENF! is moving towards a completely modular design.  This means that user
 development will be easy, and fast.  At the moment, the seeds and parsers are

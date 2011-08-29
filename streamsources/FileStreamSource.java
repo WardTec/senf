@@ -43,6 +43,7 @@ public class FileStreamSource implements JunkStreamSource
 	}
 
 	private File root, curFile;
+	private File[] fl;
 	private int curFileIndex;
 	private boolean advanced;
     private boolean junk;
@@ -68,6 +69,9 @@ public class FileStreamSource implements JunkStreamSource
 				root = root.getParentFile().getCanonicalFile();
 			else
 				throw new IOException( "Invalid file/folder" );
+
+			fl = root.listFiles();
+			junk = (fl == null);
 		} catch( FileNotFoundException fnfe ) {
 			throw new SenfStreamSourceException( "Root dir not found!" );
 		} catch( IOException ioe ) {
@@ -80,15 +84,10 @@ public class FileStreamSource implements JunkStreamSource
 		if( advanced )
 			return true;
 
+		if(junk)
+			return false;
+
 		try {
-			File[] fl = root.listFiles();
-
-            if( fl == null)
-            {
-                junk = true;
-                return false;
-            }
-
             while( ++curFileIndex < fl.length )
             {
                 curFile = fl[ curFileIndex ];

@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
+import org.apache.tika.Tika;
 
 public class SenfScanner implements Runnable {
 
@@ -18,13 +19,13 @@ public class SenfScanner implements Runnable {
 	private final String TAB = "\t";
 	private SenfACL acl;
 	private SenfOptions opts;
-	private SenfParserManager spm;
 	private SenfResult results;
 	private SenfDoneThing sdt;
 	private SenfMatchEvent sme;
 	private OutputThing out;
 	private OutputThing status;
 	private int numMatches = 0;
+	private Tika tika;
 
 	public SenfScanner(SenfOptions o, SenfDoneThing done, SenfMatchEvent match, OutputThing ot, OutputThing so) throws Exception {
 		acl = new SenfACL(ACL_FILE);
@@ -32,8 +33,8 @@ public class SenfScanner implements Runnable {
 		sme = match;
 		opts = o;
 		opts.loadSeeds();
-		spm = new SenfParserManager();
 		results = new SenfResult(opts.minMatches);
+		tika = new Tika();
 
 		out = ot;
 		status = so;
@@ -175,7 +176,6 @@ public class SenfScanner implements Runnable {
 
 			while(sss.hasNext()) {
 				SenfObject so = sss.next();
-				so = spm.parse(so);
 				if(so instanceof SenfStream) {
 					SenfStream ss = (SenfStream)so;
 					scan(ss);
@@ -199,7 +199,7 @@ public class SenfScanner implements Runnable {
 	private boolean scan(SenfStream ss) {
 		try {
 			if(ss.shouldScan(opts)) {
-				BufferedInputStream bis = new BufferedInputStream(ss.getInputStream());
+				BufferedReader br = new BufferedReader(tika.parse(ss.getInputStream()));
 				int matches = 0;
 				boolean eof = false;
 
@@ -210,14 +210,14 @@ public class SenfScanner implements Runnable {
 				}
 
 				while(!eof) {
-					int c = bis.read();
+					int c = br.read();
 					eof = (c == -1);
 
 					for(int i = 0; i < opts.scanners.length; i++) {
 						matches += opts.scanners[i].match(c, results);
 					}
 					if(matches == opts.minMatches) {
-						bis.close();
+						br.close();
 
 
 						out.println("Scanning Stream: " + ss.getURI() + TAB + "size: " + ss.size() + " bytes" + TAB + "Found Match");
@@ -232,7 +232,7 @@ public class SenfScanner implements Runnable {
 						return true;
 					}
 				}
-				bis.close();
+				br.close();
 				if(opts.verbose) {
 					out.println("Scanning Stream: " + ss.getURI() + TAB + "size: " + ss.size() + " bytes");
 				}
