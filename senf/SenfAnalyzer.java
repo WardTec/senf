@@ -43,6 +43,7 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.JTextComponent;
 import java.awt.Color;
 import java.util.zip.*;
+import org.apache.tika.Tika;
 
 class SenfAnalyzer extends JDialog
 {
@@ -64,6 +65,7 @@ class SenfAnalyzer extends JDialog
 	private final int offsetcontext = 10;
 	private char[] readin;
 	private BufferedReader br;
+	private Tika tika;
 
 	public SenfAnalyzer(SenfResult resultset, Frame parent, boolean modal)
 	{
@@ -117,6 +119,7 @@ class SenfAnalyzer extends JDialog
 
 		this.result = resultset;
 		this.readin = new char[bytestoread];
+		tika = new Tika();
 
 		//TODO: Add in parsing to display filetypes that need parsed...
 		BufferedInputStream bis;
@@ -132,8 +135,14 @@ class SenfAnalyzer extends JDialog
 			}
 			else
 				bis = new BufferedInputStream( result.getSS().getInputStream() );
-
-			br = new BufferedReader( new InputStreamReader( bis ) );
+			try {
+				br = new BufferedReader(tika.parse(bis));
+				br.mark(1);
+				br.read();
+				br.reset();
+			} catch(IOException ioe) {
+				br = new BufferedReader( new InputStreamReader( result.getSS().getInputStream() ) );
+			}
 		}
 		catch( Exception E )
 		{

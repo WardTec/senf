@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
 import org.apache.tika.Tika;
+import java.io.InputStreamReader;
 
 public class SenfScanner implements Runnable {
 
@@ -199,7 +200,17 @@ public class SenfScanner implements Runnable {
 	private boolean scan(SenfStream ss) {
 		try {
 			if(ss.shouldScan(opts)) {
-				BufferedReader br = new BufferedReader(tika.parse(ss.getInputStream()));
+				BufferedReader br;
+				try {
+					br = new BufferedReader(tika.parse(ss.getInputStream()));
+					// Sometimes tika blows up on the first read. Attempt read so this can be handled.
+					br.mark(1);
+					br.read();
+					br.reset();
+				} catch(IOException ioe) {
+					// If tika can't parse, just read as plain text
+					br = new BufferedReader(new InputStreamReader(ss.getInputStream()));
+				}
 				int matches = 0;
 				boolean eof = false;
 
@@ -244,6 +255,7 @@ public class SenfScanner implements Runnable {
 			System.out.println(fnf);
 		} catch(IOException ioe) {
 			System.out.println(ioe);
+			ioe.printStackTrace();
 		} catch(SenfObjectException soe) {
 			System.out.println(soe);
 		}
