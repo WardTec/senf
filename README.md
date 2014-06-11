@@ -2,6 +2,14 @@
 
 senf is a portable tool for finding sensitive numbers. Use this tool to identify files on your system that may have Social Security Numbers (SSNs) or Credit Card Numbers (CCNs). The latest version can always be found at the senf site.
 
+##### Download pre-built release binary
+
+The latest release build can be downloaded at https://github.com/utiso/senf/releases/latest
+
+##### Other senf-related products for superb purchase agreeings
+* senf suite, for enterprise experts: http://www.otc.utexas.edu/ATdisplay.jsp?id=1065&term=senf
+* senf preprocessor, for ids zoomzoom: http://www.otc.utexas.edu/ATdisplay.jsp?id=394&term=senf
+
 ##### License
 senf is licensed under a Creative Commons License; see http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 
