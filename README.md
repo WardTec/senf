@@ -133,9 +133,7 @@ An example "senf.acl" file is included with common entries. In the case of two c
 ---
 
 ### Libraries
-senf is now able to use external JAR libraries to scan more file types than before. The most notable example of this is PDF files. senf uses  PDFBox to parse PDF files properly. It should be noted, that the PDFBox library depends on the  FontBox library.
-
-These libraries should be placed in the "libs" folder in order for senf to function properly. They may be named anything, and will still function.
+senf relies on the Apache Tika library (https://tika.apache.org/) to parse file types. This library should be placed in the "lib" folder in order for senf to function properly. While use of this library does allow senf to scan many file types, there is a caveat: currently, Tika does make use of temporary files while scanning; under normal circumstances, these are deleted when they are no longer used, but in certain circumstances (e.g. JVM crash) they might not get cleaned up.
 
 ---
 
@@ -195,8 +193,21 @@ Socials are verified against their area (the first three digits), according to t
 
 ---
 
+### Developers developers developers developers
+
+#### Buildin'
+
+To compile the source code and build a runnable jar file, just run the included build.sh script. Or, to do it manually:
+
+	javac -cp lib/tika.jar senf/*.java streams/*.java streamsources/*.java seeds/*.java parsers/*.java
+	jar cmf manifest senf.jar senf/*.class senf/images/* streams/*.class streamsources/*.class
+
+#### Extendin'
+
+Seeds are objects which implement the senf.Seed interface. At runtime, senf will load any seeds located in the "seeds" directory and use them when scanning.
+
+---
+
 ### Okay, that's all
 
 Thank you for using senf! Feedback and questions are welcome; email security@utexas.edu
-
-This version of the senf README was updated for senf.haku.335.
