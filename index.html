@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="senf : sensitive number finder" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>senf</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/utiso/senf">View on GitHub</a>
+
+          <h1 id="project_title">senf</h1>
+          <h2 id="project_tagline">sensitive number finder</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/utiso/senf/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/utiso/senf/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="senf-the-mustardy-sensitive-number-finder" class="anchor" href="#senf-the-mustardy-sensitive-number-finder"><span class="octicon octicon-link"></span></a>senf: the mustardy sensitive number finder</h3>
+
+<p>senf is a portable tool for finding sensitive numbers. Use this tool to identify files on your system that may have Social Security Numbers (SSNs) or Credit Card Numbers (CCNs). The latest version can always be found at the senf site.</p>
+
+<h5>
+<a name="warning-about-senf" class="anchor" href="#warning-about-senf"><span class="octicon octicon-link"></span></a>Warning! [About senf]</h5>
+
+<p><em>Warning</em>: Do not have a false sense of security after running this program</p>
+
+<p>It is important to understand what senf is, and what senf is not</p>
+
+<h5>
+<a name="what-senf-is" class="anchor" href="#what-senf-is"><span class="octicon octicon-link"></span></a>What senf is</h5>
+
+<ul>
+<li>A program written in Java by humans</li>
+<li>A program which can quickly and conveniently point the operator of a computer to files which contain strings of text which resemble SSNs or CCNs</li>
+<li>A program which tries to find files with large quantities of SSNs/CCNs; you can tell it to find a single occurence of a pattern, but that will yield many false positives.</li>
+</ul><h5>
+<a name="what-senf-is-not" class="anchor" href="#what-senf-is-not"><span class="octicon octicon-link"></span></a>What senf is not</h5>
+
+<ul>
+<li>An infallible oracle which will detect all SSNs/CCNs and only SSNs/CCNs.</li>
+<li>A prophet which will enlighten a computer operator as to the exact location of an SSN/CCN within a file (although the GUI version is somewhat sibylline).</li>
+<li>Designed to detect sensitive data in encoded/encrypted binary files. In fact, it skips many file extensions by default.</li>
+</ul><h5>
+<a name="what-all-this-means" class="anchor" href="#what-all-this-means"><span class="octicon octicon-link"></span></a>What all this means</h5>
+
+<ul>
+<li>There will be false positives</li>
+<li>There will be false negatives</li>
+</ul><h5>
+<a name="which-reduces-to-even-though-its-longer" class="anchor" href="#which-reduces-to-even-though-its-longer"><span class="octicon octicon-link"></span></a>Which reduces to (even though it's longer)!</h5>
+
+<p>This tool is not to be regarded as the end-all in your effort to ensure your computer is free of SSN/CCN records. It simply will report to you files that contain numbers that could pose a security threat. Remember, it looks for strings of numbers -- and the typical computer has lots of these.</p>
+
+<hr><h3>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h3>
+
+<h4>
+<a name="java-16-jre" class="anchor" href="#java-16-jre"><span class="octicon octicon-link"></span></a>Java 1.6 JRE</h4>
+
+<p>No matter what system you're running on, you need the  Java 1.6 runtime (or greater); you do not need the whole Java 1.6 SDK, which includes the runtime.</p>
+
+<h4>
+<a name="system-path" class="anchor" href="#system-path"><span class="octicon octicon-link"></span></a>System path</h4>
+
+<p>We assume that the Java interpreter is in your environment path (meaning, no matter where we try to run "java" from, it will run). The JRE installer should modify your system path to include the Java interpreter.</p>
+
+<p>If you get a strange error message saying something along the lines of "If you see this, senf did not run!" then chances are your path is not set up correctly. Unfortunately, the solution to this is beyond the scope of this text.</p>
+
+<hr><h3>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<p>Once the JRE is installed, all you need to do is copy senf.jar and the seeds folder to some folder on the computer that is going to run the scan. You might also want to copy the configuration files to the same folder.</p>
+
+<hr><h3>
+<a name="running" class="anchor" href="#running"><span class="octicon octicon-link"></span></a>Running</h3>
+
+<h4>
+<a name="brief-note" class="anchor" href="#brief-note"><span class="octicon octicon-link"></span></a>Brief Note</h4>
+
+<p>On some Operating Systems (typically Windows and Mac OS X), simply double-clicking on the senf.jar file will launch the program automatically. If this works, you can skip the rest of this section.</p>
+
+<h4>
+<a name="windows" class="anchor" href="#windows"><span class="octicon octicon-link"></span></a>Windows</h4>
+
+<p>Open a command prompt
+Navigate to the folder in which senf is installed.
+Run java -jar senf.jar (with optional arguments)</p>
+
+<h4>
+<a name="linux-and-mac-os-x" class="anchor" href="#linux-and-mac-os-x"><span class="octicon octicon-link"></span></a>Linux and Mac OS X</h4>
+
+<p>Open a command shell
+Navigate to the folder in which senf is installed.
+Run java -jar senf.jar (with optional arguments)</p>
+
+<hr><h3>
+<a name="using-senf" class="anchor" href="#using-senf"><span class="octicon octicon-link"></span></a>Using senf</h3>
+
+<h4>
+<a name="usage-senf-options" class="anchor" href="#usage-senf-options"><span class="octicon octicon-link"></span></a>Usage: senf [OPTIONS]</h4>
+
+<table>
+<thead><tr>
+<th>Option</th>
+<th>Default</th>
+<th>Effect</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>-q</td>
+<td>off</td>
+<td>quiet mode (display no output)</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>off</td>
+<td>verbose mode (display everything)</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>off</td>
+<td>print error messages to the screen</td>
+</tr>
+<tr>
+<td>-p </td>
+<td>working dir</td>
+<td>Set the path to start scanning from</td>
+</tr>
+<tr>
+<td>-l </td>
+<td>off</td>
+<td>Set modified-date check; files last modified before this date are skipped</td>
+</tr>
+<tr>
+<td>-f </td>
+<td>infinite</td>
+<td>Set the max file size to scan; end size (no spaces) with 'g' for gigs, 'm' for megs, 'k' for kilobytes, and nothing for bytes</td>
+</tr>
+<tr>
+<td>-m </td>
+<td>15</td>
+<td>Set minimum number of times to match a CCN/SSN pattern before reporting a file</td>
+</tr>
+<tr>
+<td>-o </td>
+<td>senf_DATE.txt</td>
+<td>Set the name of the file (including path, if you like) where log information will be saved</td>
+</tr>
+<tr>
+<td>-al</td>
+<td>on</td>
+<td>Append the current log to the end of the file if it already exists</td>
+</tr>
+<tr>
+<td>-ac</td>
+<td>off</td>
+<td>Append configuration information to the end of the output log</td>
+</tr>
+<tr>
+<td>-nl</td>
+<td>off</td>
+<td>Do not use a log file</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>off</td>
+<td>Hide the GUI</td>
+</tr>
+<tr>
+<td>-as</td>
+<td>off</td>
+<td>Auto-start scanning (ignored when -g is specified)</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>n/a</td>
+<td>Display this help and exit</td>
+</tr>
+</tbody>
+</table><p>By default, senf only prints to the screen files which are matched -- not all output is shown.</p>
+
+<h4>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h4>
+
+<ul>
+<li>To search all files in your home directory in Linux/Mac OS X
+
+<ul>
+<li>java -jar senf.jar -p ~/</li>
+</ul>
+</li>
+<li>To search all files in your home directory in Windows XP
+
+<ul>
+<li>java -jar senf.jar -p "C:\Documents and Settings&lt;yourname&gt;"</li>
+</ul>
+</li>
+<li>To scan only files &lt;= 100MB, ensure that each one has at least 12 matches before marking it as possible, display error messages, and start in a folder called C:\mustard\gruga
+
+<ul>
+<li>java -jar senf.jar -f 100m -m 12 -e -p "C:\mustard\gruga"</li>
+</ul>
+</li>
+</ul><p>Also, note that this program may take a while to complete; again, by default, the only things it prints to the screen are possible matches (ie no errors), so it may look like it's frozen, not printing anything for a while, but it's (probably) not.</p>
+
+<p>As of the Sasuke.188 release, senf provides a GUI for ease of use. The GUI offers a results viewer to help the user quickly identify what was flagged by senf as being sensitive. Results appear in the central pane of the senf window as they are found; if an entry is clicked on, the senf Analyzer will pop up, showing the applicable matches in the file.</p>
+
+<hr><h3>
+<a name="configuration-files" class="anchor" href="#configuration-files"><span class="octicon octicon-link"></span></a>Configuration files</h3>
+
+<h4>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h4>
+
+<p>senf uses the file senf.conf to load default settings.</p>
+
+<h4>
+<a name="extensions" class="anchor" href="#extensions"><span class="octicon octicon-link"></span></a>Extensions</h4>
+
+<p>As of the Haku version, senf uses an ACL in place of the old whitelist/blacklist system. The ACL is contained in the file senf.acl, and can be modified either by editing the file, or through the senf GUI.</p>
+
+<p>ACL entries have three columns. The first column denotes whether to allow or deny matches. The second dictates what type of match to look for. The third contains the expression to search for. Possible entries for each row are listed below.</p>
+
+<table>
+<thead><tr>
+<th>ROW1</th>
+<th>ROW2</th>
+<th>ROW3</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>ALLOW</td>
+<td>BEGINSWITH</td>
+<td></td>
+</tr>
+<tr>
+<td>DENY</td>
+<td>CONTAINS</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>ENDSWITH</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>EXACTLY</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>REGEX</td>
+<td></td>
+</tr>
+</tbody>
+</table><p>An example "senf.acl" file is included with common entries. In the case of two conflicting entries, the entry listed first will over rule the later entry.</p>
+
+<hr><h3>
+<a name="libraries" class="anchor" href="#libraries"><span class="octicon octicon-link"></span></a>Libraries</h3>
+
+<p>senf is now able to use external JAR libraries to scan more file types than before. The most notable example of this is PDF files. senf uses  PDFBox to parse PDF files properly. It should be noted, that the PDFBox library depends on the  FontBox library.</p>
+
+<p>These libraries should be placed in the "libs" folder in order for senf to function properly. They may be named anything, and will still function.</p>
+
+<hr><h3>
+<a name="how-senf-works" class="anchor" href="#how-senf-works"><span class="octicon octicon-link"></span></a>How senf Works</h3>
+
+<p>The way senf scans has changed drasticly with the release of Haku. There are four important parts to senf Haku. Parsers, Seeds, Streams, and Stream Sources.</p>
+
+<h4>
+<a name="streams" class="anchor" href="#streams"><span class="octicon octicon-link"></span></a>Streams</h4>
+
+<p>A Stream is something that senf can scan, and implements the class senfStream. An example of a "Stream" is a text file.</p>
+
+<h4>
+<a name="stream-sources" class="anchor" href="#stream-sources"><span class="octicon octicon-link"></span></a>Stream Sources</h4>
+
+<p>A Stream Source is something that contains streams, and implemtnts the class senfStreamSource. An example of a Stream Source is a directory, or a zip file.</p>
+
+<h4>
+<a name="seeds" class="anchor" href="#seeds"><span class="octicon octicon-link"></span></a>Seeds</h4>
+
+<p>A Seed is something that senf will look for in a Stream. Seeds implement the class Seed. As of senf Sasuke.188, Seeds are modular. This means that seeds may be added/removed from the "seeds" directory to modify what senf will or will not search for within a Stream. At the moment, senf includes a Seed for both Social Security Numbers and Credit Card numbers.</p>
+
+<h4>
+<a name="parsers" class="anchor" href="#parsers"><span class="octicon octicon-link"></span></a>Parsers</h4>
+
+<p>Parses are the objects that tell the senf engine what each "object" that is to be scanned should be scanned as. That is, the Parser tells senf what type of Stream or StreamSource each senfObject should be cast as. Parsers implement the class senfParser, and are modular.</p>
+
+<hr><h3>
+<a name="algorithms" class="anchor" href="#algorithms"><span class="octicon octicon-link"></span></a>Algorithms</h3>
+
+<p>senf looks for certain patterns to reduce false positives. Those patterns are described here. These patterns cannot be used to find every conceivable incarnation of the numbers senf searches for. However, if you have suggestions for improving the algorithms (and, better, known false negatives to back up your suggestions) please let us know.</p>
+
+<h4>
+<a name="credit-card-numbers" class="anchor" href="#credit-card-numbers"><span class="octicon octicon-link"></span></a>Credit card numbers</h4>
+
+<h5>
+<a name="formats" class="anchor" href="#formats"><span class="octicon octicon-link"></span></a>Formats</h5>
+
+<p>There are a number of valid credit card formats. senf supports only the 16 digit formats. This includes Mastercard, some (but evidently not all) VISA, and Discover. It does NOT include, for example, American Express.</p>
+
+<h5>
+<a name="separators" class="anchor" href="#separators"><span class="octicon octicon-link"></span></a>Separators</h5>
+
+<p>Credit cards numbers may be one long string of numbers (nnnnnnnnnnnnnnnn), or may be separated into groups of four digits (nnnn-nnnn-nnnn-nnnn). There are, of course, as many ways to delimit groups of digits as can be imagined; senf only counts matches that use either no separator, or only one of:</p>
+
+<ul>
+<li>dash ("-")</li>
+<li>space (" ")</li>
+<li>dot (".")</li>
+<li>pipe ("|")</li>
+</ul><h5>
+<a name="luhn-check" class="anchor" href="#luhn-check"><span class="octicon octicon-link"></span></a>Luhn check</h5>
+
+<p>Credit cards must pass a Luhn mod 10 check to be considered valid.</p>
+
+<h4>
+<a name="social-security-numbers" class="anchor" href="#social-security-numbers"><span class="octicon octicon-link"></span></a>Social Security Numbers</h4>
+
+<h5>
+<a name="formats-and-separators" class="anchor" href="#formats-and-separators"><span class="octicon octicon-link"></span></a>Formats and separators</h5>
+
+<p>Socials are detected in both single string (nnnnnnnnn) and grouped (nnn-nn-nnnn) formats; permitted separators are the same as credit card numbers.</p>
+
+<h5>
+<a name="validity-checking" class="anchor" href="#validity-checking"><span class="octicon octicon-link"></span></a>Validity checking</h5>
+
+<p>Socials are verified against their area (the first three digits), according to the Social Security Administration's current list of valid high groups. In addition, group and serial numbers may not be all zeroes.</p>
+
+<hr><h3>
+<a name="okay-thats-all" class="anchor" href="#okay-thats-all"><span class="octicon octicon-link"></span></a>Okay, that's all</h3>
+
+<p>Thank you for using senf! Feedback and questions are welcome; email <a href="mailto:security@utexas.edu">security@utexas.edu</a></p>
+
+<p>This version of the senf README was updated for senf.haku.335.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">senf maintained by <a href="https://github.com/utiso">utiso</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
