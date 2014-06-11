@@ -37,6 +37,11 @@
 <p>senf is a portable tool for finding sensitive numbers. Use this tool to identify files on your system that may have Social Security Numbers (SSNs) or Credit Card Numbers (CCNs). The latest version can always be found at the senf site.</p>
 
 <h5>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h5>
+
+<p>senf is licensed under a Creative Commons License; see <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">http://creativecommons.org/licenses/by-nc-sa/3.0/us/</a></p>
+
+<h5>
 <a name="warning-about-senf" class="anchor" href="#warning-about-senf"><span class="octicon octicon-link"></span></a>Warning! [About senf]</h5>
 
 <p><em>Warning</em>: Do not have a false sense of security after running this program</p>
@@ -275,9 +280,7 @@ Run java -jar senf.jar (with optional arguments)</p>
 <hr><h3>
 <a name="libraries" class="anchor" href="#libraries"><span class="octicon octicon-link"></span></a>Libraries</h3>
 
-<p>senf is now able to use external JAR libraries to scan more file types than before. The most notable example of this is PDF files. senf uses  PDFBox to parse PDF files properly. It should be noted, that the PDFBox library depends on the  FontBox library.</p>
-
-<p>These libraries should be placed in the "libs" folder in order for senf to function properly. They may be named anything, and will still function.</p>
+<p>senf relies on the Apache Tika library (<a href="https://tika.apache.org/">https://tika.apache.org/</a>) to parse file types. This library should be placed in the "lib" folder in order for senf to function properly. While use of this library does allow senf to scan many file types, there is a caveat: currently, Tika does make use of temporary files while scanning; under normal circumstances, these are deleted when they are no longer used, but in certain circumstances (e.g. JVM crash) they might not get cleaned up.</p>
 
 <hr><h3>
 <a name="how-senf-works" class="anchor" href="#how-senf-works"><span class="octicon octicon-link"></span></a>How senf Works</h3>
@@ -346,11 +349,26 @@ Run java -jar senf.jar (with optional arguments)</p>
 <p>Socials are verified against their area (the first three digits), according to the Social Security Administration's current list of valid high groups. In addition, group and serial numbers may not be all zeroes.</p>
 
 <hr><h3>
+<a name="developers-developers-developers-developers" class="anchor" href="#developers-developers-developers-developers"><span class="octicon octicon-link"></span></a>Developers developers developers developers</h3>
+
+<h4>
+<a name="buildin" class="anchor" href="#buildin"><span class="octicon octicon-link"></span></a>Buildin'</h4>
+
+<p>To compile the source code and build a runnable jar file, just run the included build.sh script. Or, to do it manually:</p>
+
+<pre><code>javac -cp lib/tika.jar senf/*.java streams/*.java streamsources/*.java seeds/*.java parsers/*.java
+jar cmf manifest senf.jar senf/*.class senf/images/* streams/*.class streamsources/*.class
+</code></pre>
+
+<h4>
+<a name="extendin" class="anchor" href="#extendin"><span class="octicon octicon-link"></span></a>Extendin'</h4>
+
+<p>Seeds are objects which implement the senf.Seed interface. At runtime, senf will load any seeds located in the "seeds" directory and use them when scanning.</p>
+
+<hr><h3>
 <a name="okay-thats-all" class="anchor" href="#okay-thats-all"><span class="octicon octicon-link"></span></a>Okay, that's all</h3>
 
 <p>Thank you for using senf! Feedback and questions are welcome; email <a href="mailto:security@utexas.edu">security@utexas.edu</a></p>
-
-<p>This version of the senf README was updated for senf.haku.335.</p>
       </section>
     </div>
 
