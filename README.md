@@ -1,3 +1,5 @@
+![Image of Senf](https://security.utexas.edu/sites/default/files/SENF%402x.png)
+
 ### senf: the mustardy sensitive number finder
 
 senf is a portable tool for finding sensitive numbers. Use this tool to identify files on your system that may have Social Security Numbers (SSNs) or Credit Card Numbers (CCNs). The latest version can always be found at the senf site.
